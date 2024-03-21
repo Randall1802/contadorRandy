@@ -12,7 +12,9 @@ export class ButtonDisComponent {
   contador : number = 0;
 
   @Output() onDis: EventEmitter<number> = new EventEmitter();
+  
   resta(){
+    //console.log(this.contador);
     this.contador--;
     this.onDis.emit(this.contador);
   }

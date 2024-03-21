@@ -27,7 +27,7 @@ describe('ButtonAddComponent', () => {
     let nuevoContador=0;
 
     component.onAdd.subscribe(contador => {
-      nuevoContador=contador;
+      nuevoContador = contador;
     })
 
     component.add();

@@ -2,6 +2,8 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { CounterComponent } from "./counter.component"
 import { ButtonAddComponent } from "./button-add/button-add.component";
 import { ButtonDisComponent } from './button-dis/button-dis.component';
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
+
 
 describe("CounterComponent Unit", () => {
     beforeEach(async () => {
@@ -18,19 +20,14 @@ describe("CounterComponent Unit", () => {
 
     it("Valor inicial del contador es 20", ()=>
     {
-    const counter = new CounterComponent();
-    expect(counter.contador).toBe(20);
+        const counter = new CounterComponent();
+        expect(counter.contador).toBe(20);
     });
 
     it("Se debe crear el texto Counter: 0 ", () => {
         const fixture = TestBed.createComponent(CounterComponent);
-
         fixture.detectChanges();  //pa detectar cambios
-
-
         const compiled: HTMLElement = fixture.nativeElement;
-
-
         expect(compiled.querySelector("h2")?.textContent).toEqual("Contador: 20");  //el signo es para que pueda o no existir. con nums es el tobe
     });
 });
@@ -43,29 +40,32 @@ describe("Integration testing", () =>{
     beforeEach(async () => {
         await TestBed.configureTestingModule({
           imports: [CounterComponent, ButtonAddComponent, ButtonDisComponent],
+          providers: [
+            { provide: ComponentFixtureAutoDetect, useValue: true }
+          ]
         }).compileComponents();
       });
 
     beforeEach(() =>{
         fixture = TestBed.createComponent(CounterComponent);
-        component=fixture.componentInstance;
+        component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
-    it("evento clic ADD", () =>{
+    it("evento clic ADD", () => {
         const compiled : HTMLElement = fixture.nativeElement;
         //console.log(compiled);
 
-        const counterValue = compiled.querySelector("h2")!;
+        const counterValue = compiled.querySelector("h2");
         const btnAdd: HTMLElement = fixture.debugElement.nativeElement.querySelector("#add");
         btnAdd.click();
 
         fixture.detectChanges();
 
-        expect(counterValue.textContent).toEqual("Contador: 21");
+        expect(counterValue?.textContent).toEqual("Contador: 21");
     });
 
-    it("evento clic DIS", () =>{
+    it("evento clic DIS", () => {
         const compiled : HTMLElement = fixture.nativeElement;
         console.log(compiled);
 
