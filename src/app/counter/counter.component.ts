@@ -8,7 +8,6 @@ import { CommonModule } from "@angular/common";
     selector: "app-contador",
     templateUrl: "./counter.component.html",
     imports: [ButtonAddComponent, ButtonDisComponent, CommonModule]
-
 })
 
 export class CounterComponent {

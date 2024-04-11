@@ -8,7 +8,7 @@ import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 describe("CounterComponent Unit", () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-          imports: [CounterComponent],
+          imports: [CounterComponent,ButtonAddComponent, ButtonDisComponent],
         }).compileComponents();
       });
 
@@ -24,10 +24,11 @@ describe("CounterComponent Unit", () => {
         expect(counter.contador).toBe(20);
     });
 
-    it("Se debe crear el texto Counter: 0 ", () => {
+    it("Se debe crear el texto Counter: 20 ", () => {
         const fixture = TestBed.createComponent(CounterComponent);
         fixture.detectChanges();  //pa detectar cambios
         const compiled: HTMLElement = fixture.nativeElement;
+        console.log(compiled);
         expect(compiled.querySelector("h2")?.textContent).toEqual("Contador: 20");  //el signo es para que pueda o no existir. con nums es el tobe
     });
 });
@@ -54,7 +55,7 @@ describe("Integration testing", () =>{
 
     it("evento clic ADD", () => {
         const compiled : HTMLElement = fixture.nativeElement;
-        //console.log(compiled);
+        console.log(compiled);
 
         const counterValue = compiled.querySelector("h2");
         const btnAdd: HTMLElement = fixture.debugElement.nativeElement.querySelector("#add");
